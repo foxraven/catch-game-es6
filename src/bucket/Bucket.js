@@ -13,11 +13,11 @@ export default class extends Phaser.Sprite {
   update () {
 
     if (this.x < this.width/2) {
-      this.x = this.width/2
+      this.x = this.width/2 + 10
     }
 
     if(this.x > this.game.width - this.width/2) {
-      this.x = this.game.width - this.width/2
+      this.x = this.game.width - this.width/2 - 10
     }
 
   }
