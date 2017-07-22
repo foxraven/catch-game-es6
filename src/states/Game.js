@@ -41,19 +41,27 @@ export default class extends Phaser.State {
 
     this.game.add.existing(this.ship)
 
-    this.comet = new Comet({
-      game: this.game,
-      x: this.world.centerX,
-      y: this.world.top,
-      asset: 'comet'
-    })
+    this.starspawner = new StarSpawner(this.game)
 
-    this.game.physics.arcade.enable(this.comet)
-    this.comet.body.gravity.y = 100
-    this.comet.body.collideWorldBounds = false
+    this.star = this.starspawner.CreateStars()
 
-    this.game.add.existing(this.comet)
+    if(!this.star === undefined) {
+      this.game.add.existing(this.star)
+    }
 
+
+    // this.comet = new Comet({
+    //   game: this.game,
+    //   x: this.world.centerX,
+    //   y: this.world.top,
+    //   asset: 'comet'
+    // })
+
+    // this.game.physics.arcade.enable(this.comet)
+    // this.comet.body.gravity.y = 100
+    // this.comet.body.collideWorldBounds = false
+
+    // this.game.add.existing(this.comet)
   }
 
   update() {
