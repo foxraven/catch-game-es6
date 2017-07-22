@@ -1,5 +1,5 @@
 export default {
     bannerText: 'Phaser + ES6 + Webpack!',
     score: 'Score',
-    fuel: 'Tank Capacity'
+    fuel: 'Fuel'
 }

@@ -16,10 +16,10 @@ export default class extends Phaser.State {
     //set background
     game.add.tileSprite(0, 0, game.width, game.height, 'space');
 
-    let UIfont = 'Bangers'
-    let UIfontSize = 40
+    let UIfont = 'Press Start 2P'
+    let UIfontSize = 16
     let UIfontFill = '#FFFFFF'
-    let score = this.add.text(this.game.width - 200, 10, Constants.score)
+    let score = this.add.text(this.game.width - 90, 10, Constants.score)
     score.padding.set(10, 16)
 
     let fuel = this.add.text(10, 10, Constants.fuel)
@@ -39,7 +39,8 @@ export default class extends Phaser.State {
       game: this.game,
       x: this.world.centerX,
       y: this.world.bounds.height - 80,
-      asset: 'ship'
+      asset: 'ship',
+      z: 3
     })
 
     this.game.physics.arcade.enable(this.ship)
@@ -65,8 +66,8 @@ export default class extends Phaser.State {
 
   // Eat the comet
   shipCometCollide(comet, ship) {
-      comet.kill();
-    }
+    comet.kill();
+  }
 
   render () {
     // if (__DEV__) {
@@ -82,6 +83,7 @@ export default class extends Phaser.State {
       game: this.game,
       x: xspawn,
       y: -100,
+      z: 1,
       asset: 'comet'
     })
 

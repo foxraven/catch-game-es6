@@ -9,14 +9,16 @@ export default class extends Phaser.State {
   }
 
   preload () {
+    game.load.script("webfont", "//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js");
+
     WebFont.load({
       google: {
-        families: ['Bangers']
+        families: ['Press Start 2P']
       },
       active: this.fontsLoaded
     })
 
-    let text = this.add.text(this.world.centerX, this.world.centerY, 'loading fonts', { font: '16px Arial', fill: '#fff', align: 'center' })
+    let text = this.add.text(this.world.centerX, this.world.centerY, 'loading fonts', { font: '16px Tahoma', fill: '#fff', align: 'center' })
     text.anchor.setTo(0.5, 0.5)
 
     this.load.image('loaderBg', './assets/images/loader-bg.png')
