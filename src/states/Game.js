@@ -29,14 +29,17 @@ export default class extends Phaser.State {
     fuel.fontSize = score.fontSize = UIfontSize
     fuel.fill = score.fill = UIfontFill
 
-    this.bucket = new Bucket({
+    this.ship = new Bucket({
       game: this.game,
       x: this.world.centerX,
       y: this.world.bounds.height - 80,
       asset: 'bucket'
     })
 
-    this.game.add.existing(this.bucket)
+    this.game.physics.arcade.enable(this.ship)
+    this.ship.body.collideWorldBounds = true
+
+    this.game.add.existing(this.ship)
 
     this.comet = new Comet({
       game: this.game,
