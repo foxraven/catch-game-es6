@@ -12,7 +12,7 @@ export default class extends Phaser.State {
 
   create () {
     let UIfont = 'Bangers'
-    let banner = this.add.text(this.world.centerX, this.game.height - 30, Constants.bannerText)
+    let banner = this.add.text(this.world.centerX, 30, Constants.bannerText)
 
     banner.font = UIfont
     banner.padding.set(10, 16)
@@ -24,7 +24,8 @@ export default class extends Phaser.State {
     let score = this.add.text(this.game.width - 200, 10, Constants.score)
     score.font = UIfont
     score.padding.set(10, 16)
-    score.fill = '#FFFFFF'
+    score.fill = '#fff'
+
     let fuel = this.add.text(10, 10, Constants.fuel)
     fuel.font = UIfont
     fuel.padding.set(10, 16)
@@ -42,8 +43,8 @@ export default class extends Phaser.State {
     this.bucket = new Bucket({
       game: this.game,
       x: this.world.centerX,
-      y: this.world.centerY,
-      asset: 'mushroom'
+      y: this.world.bottom - 80,
+      asset: 'bucket'
     })
 
     this.game.add.existing(this.bucket)  
