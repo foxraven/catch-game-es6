@@ -45,7 +45,7 @@ export default class extends Phaser.State {
 
     this.game.add.existing(this.ship)
 
-    game.time.events.repeat(Phaser.Timer.SECOND * 2, 100, this.createStar, this);
+    this.game.time.events.repeat(Phaser.Timer.SECOND * 2, 100, this.createStar, this);
 
   }
 
@@ -61,7 +61,6 @@ export default class extends Phaser.State {
     function shipCometCollide(comet, ship) {
       comet.kill();
     }
-
   }
 
   render () {
