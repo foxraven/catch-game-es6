@@ -10,7 +10,6 @@ export default class extends Phaser.Sprite {
   }
 
   update () {
-
     if (this.x > game.world.width - 66) {
       this.movingRight = false
     }
@@ -24,7 +23,5 @@ export default class extends Phaser.Sprite {
     } else {
       this.x -= 10
     }
-
   }
-
 }

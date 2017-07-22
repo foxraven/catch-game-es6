@@ -18,8 +18,11 @@ export default class extends Phaser.Sprite {
 
     if (this.movingRight) {
       this.x += 5
+      this.angle += 10
     } else {
       this.x -= 5
+      this.angle -= 10
     }
+
   }
 }
