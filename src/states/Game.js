@@ -17,23 +17,23 @@ export default class extends Phaser.State {
     game.add.tileSprite(0, 0, game.width, game.height, 'space');
     
     let UIfont = 'Bangers'
+    let UIfontSize = 40
+    let UIfontFill = '#FFFFFF'
+    /*
     let banner = this.add.text(this.world.centerX, 30, Constants.bannerText)
-
-    banner.font = UIfont
     banner.padding.set(10, 16)
-    banner.fontSize = 40
-    banner.fill = '#77BFA3'
     banner.smoothed = false
     banner.anchor.setTo(0.5)
-
+    */
     let score = this.add.text(this.game.width - 200, 10, Constants.score)
-    score.font = UIfont
     score.padding.set(10, 16)
-    score.fill = '#FFFFFF'
+    
     let fuel = this.add.text(10, 10, Constants.fuel)
-    fuel.font = UIfont
     fuel.padding.set(10, 16)
-    fuel.fill = '#FFFFFF'
+
+    fuel.font = score.font = UIfont
+    fuel.fontSize = score.fontSize = UIfontSize
+    fuel.fill = score.fill = UIfontFill
 
     this.mushroom = new Mushroom({
       game: this.game,
@@ -51,12 +51,7 @@ export default class extends Phaser.State {
       asset: 'bucket'
     })
     
-    this.game.add.existing(this.bucket)  
-
-    stars = game.add.group();
-    stars.enableBody = true;
-    stars.physicsBodyType = Phaser.Physics.ARCADE;
-
+    this.game.add.existing(this.bucket)
     
     this.comet = new Comet({
       game: this.game,
