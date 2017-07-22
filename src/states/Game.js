@@ -28,23 +28,12 @@ export default class extends Phaser.State {
     fuel.font = UIfont
     fuel.padding.set(10, 16)
 
-    this.mushroom = new Mushroom({
-      game: this.game,
-      x: this.world.centerX,
-      y: this.world.centerY,
-      asset: 'mushroom'
-    })
-
-    this.game.add.existing(this.mushroom)
-
     this.bucket = new Bucket({
       game: this.game,
       x: this.world.centerX,
-      y: this.world.bottom - 80,
+      y: this.world.bottom ,
       asset: 'bucket'
     })
-
-    // this.bucket.body.collideWorldBounds = true;
 
     this.game.add.existing(this.bucket)
 
