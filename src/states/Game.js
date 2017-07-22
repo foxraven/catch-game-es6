@@ -45,6 +45,10 @@ export default class extends Phaser.State {
       asset: 'comet'
     })
 
+    this.game.physics.arcade.enable(this.comet)
+    this.comet.body.gravity.y = 100
+    this.comet.body.collideWorldBounds = false
+
     this.game.add.existing(this.comet)
   }
 
