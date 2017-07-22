@@ -12,6 +12,7 @@ export default class extends Phaser.Sprite {
 
   update () {
 
+    // Set the x coordinated of the ship so they don't collide with the edges
     if (this.x < this.width / 2) {
       this.x = (this.width / 2) + 10
     }
@@ -20,7 +21,8 @@ export default class extends Phaser.Sprite {
       this.x = (this.game.width - this.width / 2) - 10
     }
 
-    this.currentYCoords = (this.game.height - this.height) + 50
+    // Set the x coordinated of the ship it stays at the bottom
+    this.currentYCoords = (this.game.height - this.height) + 20
 
     if (this.y > this.currentYCoords || this.y < this.currentYCoords) {
       this.y = this.currentYCoords

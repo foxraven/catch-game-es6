@@ -29,6 +29,9 @@ export default class extends Phaser.State {
     fuel.fontSize = score.fontSize = UIfontSize
     fuel.fill = score.fill = UIfontFill
 
+    /* ======================
+      SHIP
+    ====================== */
     this.ship = new Bucket({
       game: this.game,
       x: this.world.centerX,
@@ -38,9 +41,13 @@ export default class extends Phaser.State {
 
     this.game.physics.arcade.enable(this.ship)
     this.ship.body.collideWorldBounds = true
+    this.ship.body.checkCollision.up = false;
 
     this.game.add.existing(this.ship)
 
+    /* ======================
+      COMET
+    ====================== */
     this.comet = new Comet({
       game: this.game,
       x: this.world.centerX,
@@ -59,6 +66,12 @@ export default class extends Phaser.State {
   update() {
     game.physics.arcade.collide(this.comet, this.ship, shipCometCollide);
 
+    // Ship follows the mouse
+    if (this.game.input.activePointer.x < this.ship.x || this.game.input.activePointer.x > this.ship.x) {
+      this.ship.x = game.input.activePointer.x;
+    }
+
+    // Eat the comet
     function shipCometCollide(comet, ship) {
       comet.kill();
     }
