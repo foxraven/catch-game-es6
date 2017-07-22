@@ -8,9 +8,14 @@ import Comet from '../stars/Comet'
 
 export default class extends Phaser.State {
   init () {}
-  preload () {}
+  preload () {
+    game.load.image('space', 'assets/images/bg_space.png');    
+  }
 
   create () {
+    //set background
+    game.add.tileSprite(0, 0, game.width, game.height, 'space');
+    
     let UIfont = 'Bangers'
     let banner = this.add.text(this.world.centerX, 30, Constants.bannerText)
 
@@ -46,8 +51,13 @@ export default class extends Phaser.State {
       y: this.world.bottom - 80,
       asset: 'bucket'
     })
-
+    
     this.game.add.existing(this.bucket)  
+
+    stars = game.add.group();
+    stars.enableBody = true;
+    stars.physicsBodyType = Phaser.Physics.ARCADE;
+
     
     this.comet = new Comet({
       game: this.game,
