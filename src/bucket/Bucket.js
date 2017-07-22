@@ -11,8 +11,6 @@ export default class extends Phaser.Sprite {
 
   update () {
 
-    console.log(this.movingRight)
-
     if (this.x > game.world.width - 66) {
       this.movingRight = false
     }
