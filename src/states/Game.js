@@ -29,6 +29,8 @@ export default class extends Phaser.State {
     fuel.fontSize = score.fontSize = UIfontSize
     fuel.fill = score.fill = UIfontFill
 
+    this.stars = new Phaser.Group(this.game)
+
     /* ======================
       SHIP
     ====================== */
@@ -50,7 +52,7 @@ export default class extends Phaser.State {
   }
 
   update() {
-    game.physics.arcade.collide(this.star, this.ship, shipCometCollide);
+    game.physics.arcade.collide(this.stars, this.ship, shipCometCollide);
 
     // Ship follows the mouse
     if (this.game.input.activePointer.x < this.ship.x || this.game.input.activePointer.x > this.ship.x) {
@@ -84,6 +86,7 @@ export default class extends Phaser.State {
     star.body.gravity.y = 100
     star.body.collideWorldBounds = false
 
+    this.stars.add(star)
     this.game.add.existing(star)
   }
 
