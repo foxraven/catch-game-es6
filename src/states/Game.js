@@ -1,6 +1,7 @@
 /* globals __DEV__ */
 import Phaser from 'phaser'
 import Mushroom from '../sprites/Mushroom'
+import Bucket from '../bucket/Bucket'
 import Constants from '../constants'
 
 export default class extends Phaser.State {
@@ -26,11 +27,22 @@ export default class extends Phaser.State {
     })
 
     this.game.add.existing(this.mushroom)
+
+    this.bucket = new Bucket({
+      game: this.game,
+      x: this.world.centerX,
+      y: this.world.centerY,
+      asset: 'mushroom'
+    })
+
+    this.game.add.existing(this.bucket)
+
   }
 
   render () {
     if (__DEV__) {
       this.game.debug.spriteInfo(this.mushroom, 32, 32)
+      this.game.debug.spriteInfo(this.bucket, 32, 32)
     }
   }
 }
