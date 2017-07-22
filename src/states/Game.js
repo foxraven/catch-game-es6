@@ -53,6 +53,16 @@ export default class extends Phaser.State {
     this.comet.body.collideWorldBounds = false
 
     this.game.add.existing(this.comet)
+
+  }
+
+  update() {
+    game.physics.arcade.collide(this.comet, this.ship, shipCometCollide);
+
+    function shipCometCollide(comet, ship) {
+      comet.kill();
+    }
+
   }
 
   render () {
@@ -61,4 +71,5 @@ export default class extends Phaser.State {
     //   this.game.debug.spriteInfo(this.bucket, 32, 32)
     // }
   }
+
 }

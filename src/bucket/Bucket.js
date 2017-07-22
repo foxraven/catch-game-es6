@@ -5,19 +5,25 @@ export default class extends Phaser.Sprite {
   constructor ({ game, x, y, asset }) {
     super(game, x, y, asset)
     this.anchor.setTo(0.5)
-    this.inputEnabled = true;
-    this.input.enableDrag(true);
-    this.input.allowVerticalDrag = false;
+    this.inputEnabled = true
+    this.input.enableDrag(true)
+    this.input.allowVerticalDrag = false
   }
 
   update () {
 
-    if (this.x < this.width/2) {
-      this.x = this.width/2 + 10
+    if (this.x < this.width / 2) {
+      this.x = (this.width / 2) + 10
     }
 
-    if(this.x > this.game.width - this.width/2) {
-      this.x = this.game.width - this.width/2 - 10
+    if(this.x > this.game.width - this.width / 2) {
+      this.x = (this.game.width - this.width / 2) - 10
+    }
+
+    this.currentYCoords = (this.game.height - this.height) + 50
+
+    if (this.y > this.currentYCoords || this.y < this.currentYCoords) {
+      this.y = this.currentYCoords
     }
 
   }
