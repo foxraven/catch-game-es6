@@ -8,16 +8,20 @@ import Comet from '../stars/Comet'
 
 export default class extends Phaser.State {
   init () {}
-  preload () {}
+  preload () {
+    game.load.image('space', 'assets/images/bg_space.png');    
+  }
 
   create () {
+    //set background
+    game.add.tileSprite(0, 0, game.width, game.height, 'space');
+    
     let UIfont = 'Bangers'
 
     let score = this.add.text(this.game.width - 200, 10, Constants.score)
     score.font = UIfont
     score.padding.set(10, 16)
-    score.fill = '#fff'
-
+    score.fill = '#FFFFFF'
     let fuel = this.add.text(10, 10, Constants.fuel)
     fuel.font = UIfont
     fuel.padding.set(10, 16)
@@ -31,6 +35,10 @@ export default class extends Phaser.State {
     })
 
     this.game.add.existing(this.bucket)
+
+    stars = game.add.group();
+    stars.enableBody = true;
+    stars.physicsBodyType = Phaser.Physics.ARCADE;
 
     this.comet = new Comet({
       game: this.game,
