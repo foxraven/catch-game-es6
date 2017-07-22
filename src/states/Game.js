@@ -29,8 +29,7 @@ export default class extends Phaser.State {
     let score = this.add.text(this.game.width - 200, 10, Constants.score)
     score.font = UIfont
     score.padding.set(10, 16)
-    score.fill = '#fff'
-
+    score.fill = '#FFFFFF'
     let fuel = this.add.text(10, 10, Constants.fuel)
     fuel.font = UIfont
     fuel.padding.set(10, 16)
