@@ -50,7 +50,7 @@ export default class extends Phaser.State {
   }
 
   update() {
-    game.physics.arcade.collide(this.comet, this.ship, shipCometCollide);
+    game.physics.arcade.collide(this.star, this.ship, shipCometCollide);
 
     // Ship follows the mouse
     if (this.game.input.activePointer.x < this.ship.x || this.game.input.activePointer.x > this.ship.x) {
@@ -61,6 +61,7 @@ export default class extends Phaser.State {
     function shipCometCollide(comet, ship) {
       comet.kill();
     }
+
   }
 
   render () {
