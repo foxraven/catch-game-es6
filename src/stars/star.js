@@ -6,7 +6,7 @@ export default class extends Phaser.Sprite {
         this.anchor.setTo(0.5)
     }
 
-    update () {
-        this.y += 1
+    update (speed) {
+        this.y += speed
     }
 }
