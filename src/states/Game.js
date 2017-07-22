@@ -38,7 +38,7 @@ export default class extends Phaser.State {
       game: this.game,
       x: this.world.centerX,
       y: this.world.bounds.height - 80,
-      asset: 'bucket'
+      asset: 'ship'
     })
 
     this.game.physics.arcade.enable(this.ship)
