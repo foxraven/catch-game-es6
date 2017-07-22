@@ -41,7 +41,7 @@ export default class extends Phaser.State {
 
     this.game.physics.arcade.enable(this.ship)
     this.ship.body.collideWorldBounds = true
-    this.ship.body.checkCollision.up = false;
+    this.ship.body.moves = false;
 
     this.game.add.existing(this.ship)
 
@@ -50,7 +50,8 @@ export default class extends Phaser.State {
   }
 
   update() {
-    game.physics.arcade.collide(this.star, this.ship, shipCometCollide);
+
+    game.physics.arcade.collide(this.comet, this.ship, shipCometCollide);
 
     // Ship follows the mouse
     if (this.game.input.activePointer.x < this.ship.x || this.game.input.activePointer.x > this.ship.x) {
