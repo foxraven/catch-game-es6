@@ -9,15 +9,22 @@ export default class extends Phaser.State {
   preload () {}
 
   create () {
-    //const bannerText = 'Phaser + ES6 + Webpack!'
+    let UIfont = 'Bangers'
     let banner = this.add.text(this.world.centerX, this.game.height - 30, Constants.bannerText)
 
-    banner.font = 'Bangers'
+    banner.font = UIfont
     banner.padding.set(10, 16)
     banner.fontSize = 40
     banner.fill = '#77BFA3'
     banner.smoothed = false
     banner.anchor.setTo(0.5)
+
+    let score = this.add.text(this.game.width - 200, 10, Constants.score)
+    score.font = UIfont
+    score.padding.set(10, 16)
+    let fuel = this.add.text(10, 10, Constants.fuel)
+    fuel.font = UIfont
+    fuel.padding.set(10, 16)
 
     this.mushroom = new Mushroom({
       game: this.game,
