@@ -39,29 +39,10 @@ export default class extends Phaser.State {
     this.game.physics.arcade.enable(this.ship)
     this.ship.body.collideWorldBounds = true
 
-    this.game.add.existing(this.ship)
+    this.game.add.existing(this.ship) 
 
-    this.starspawner = new StarSpawner(this.game)
-
-    this.star = this.starspawner.CreateStars()
-
-    if(!this.star === undefined) {
-      this.game.add.existing(this.star)
-    }
-
-
-    // this.comet = new Comet({
-    //   game: this.game,
-    //   x: this.world.centerX,
-    //   y: this.world.top,
-    //   asset: 'comet'
-    // })
-
-    // this.game.physics.arcade.enable(this.comet)
-    // this.comet.body.gravity.y = 100
-    // this.comet.body.collideWorldBounds = false
-
-    // this.game.add.existing(this.comet)
+    game.time.events.repeat(Phaser.Timer.SECOND * 2, 100, this.createStar, this);
+    
   }
 
   update() {
@@ -69,8 +50,7 @@ export default class extends Phaser.State {
 
     function shipCometCollide(comet, ship) {
       comet.kill();
-    }
-
+    }   
   }
 
   render () {
@@ -78,6 +58,23 @@ export default class extends Phaser.State {
     //   this.game.debug.spriteInfo(this.mushroom, 32, 32)
     //   this.game.debug.spriteInfo(this.bucket, 32, 32)
     // }
+  }
+
+  createStar() {
+    let xspawn = Math.floor(Math.random() * this.world.bounds.width)
+
+    let star = new Comet({
+      game: this.game,
+      x: xspawn,
+      y: -100,
+      asset: 'comet'
+    })
+
+    this.game.physics.arcade.enable(star)
+    star.body.gravity.y = 100
+    star.body.collideWorldBounds = false
+
+    this.game.add.existing(star) 
   }
 
 }

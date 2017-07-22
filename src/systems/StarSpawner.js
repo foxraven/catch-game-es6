@@ -4,29 +4,32 @@ import Comet from '../stars/Comet'
 export default class extends Phaser.GameObjectFactory {
     constructor (game) {
         super(game)
-        this.spawnrate = 1000
+        this.spawnrate = 2000
     }
 
     CreateStars() {
         let xspawn = this.SetXSpawn()
-        
-        if ((this.game.time.now % this.spawnrate) == 0) {
+
+        let time = Math.round(this.game.time.now / 100) * 100
+
+        if ((time % this.spawnrate) == 0) {
 
             let star = new Comet({
             game: this.game,
-            x: this.world.centerX,
-            y: this.world.top,
+            x: xspawn,
+            y: 100,
             asset: 'comet'
             })
 
             this.game.physics.arcade.enable(star)
             star.body.gravity.y = 100
             star.body.collideWorldBounds = false
-
+            
+            // console.log(star)
             return star
         }
 
-        return undefined
+        return null
     }
 
     SetXSpawn() {
