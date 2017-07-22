@@ -29,7 +29,8 @@ export default class extends Phaser.State {
     fuel.fontSize = score.fontSize = UIfontSize
     fuel.fill = score.fill = UIfontFill
 
-    this.stars = new Phaser.Group(this.game)
+    this.stars = this.add.group()
+    this.stars.enableBody = true;
 
     /* ======================
       SHIP
@@ -52,18 +53,20 @@ export default class extends Phaser.State {
   }
 
   update() {
-    game.physics.arcade.collide(this.stars, this.ship, shipCometCollide);
+    this.game.physics.arcade.overlap(this.stars, this.ship, this.shipCometCollide, null, this);
+
+    this.stars.forEach(star => this.game.physics.arcade.overlap(this.ship, star, this.shipCometCollide, null, this))
 
     // Ship follows the mouse
     if (this.game.input.activePointer.x < this.ship.x || this.game.input.activePointer.x > this.ship.x) {
       this.ship.x = game.input.activePointer.x;
     }
+  }
 
-    // Eat the comet
-    function shipCometCollide(comet, ship) {
+  // Eat the comet
+  shipCometCollide(comet, ship) {
       comet.kill();
     }
-  }
 
   render () {
     // if (__DEV__) {
