@@ -3,6 +3,8 @@ import Phaser from 'phaser'
 import Mushroom from '../sprites/Mushroom'
 import Bucket from '../bucket/Bucket'
 import Constants from '../constants'
+import StarSpawner from '../systems/StarSpawner'
+import Comet from '../stars/Comet'
 
 export default class extends Phaser.State {
   init () {}
@@ -27,6 +29,7 @@ export default class extends Phaser.State {
     let fuel = this.add.text(10, 10, Constants.fuel)
     fuel.font = UIfont
     fuel.padding.set(10, 16)
+    fuel.fill = '#FFFFFF'
 
     this.bucket = new Bucket({
       game: this.game,
@@ -37,12 +40,20 @@ export default class extends Phaser.State {
 
     this.game.add.existing(this.bucket)
 
+    this.comet = new Comet({
+      game: this.game,
+      x: this.world.centerX,
+      y: this.world.top,
+      asset: 'comet'
+    })
+
+    this.game.add.existing(this.comet)
   }
 
   render () {
-    if (__DEV__) {
-      // this.game.debug.spriteInfo(this.mushroom, 32, 32)
-      // this.game.debug.spriteInfo(this.bucket, 32, 32)
-    }
+    // if (__DEV__) {
+    //   this.game.debug.spriteInfo(this.mushroom, 32, 32)
+    //   this.game.debug.spriteInfo(this.bucket, 32, 32)
+    // }
   }
 }
