@@ -4,6 +4,10 @@ export default class extends Phaser.Sprite {
     constructor ({ game, x, y, asset }) {
         super(game, x, y, asset)
         this.anchor.setTo(0.5)
+        this.game.physics.arcade.enable(this)
+        this.body.collideWorldBounds = false
+        this.body.gravity.y = 200
+        this.game.add.existing(this)
     }
 
     update (speed) {

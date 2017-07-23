@@ -45,8 +45,6 @@ export default class extends Phaser.State {
   }
 
   update() {
-    // this.game.physics.arcade.overlap(this.stars, this.ship, this.shipCometCollide, null, this);
-
     this.stars.forEach(star => this.game.physics.arcade.overlap(this.ship, star, this.shipCometCollide, null, this))
 
     // Ship follows the mouse
