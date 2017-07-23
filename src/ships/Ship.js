@@ -8,6 +8,10 @@ export default class extends Phaser.Sprite {
     this.inputEnabled = true
     this.input.enableDrag(true)
     this.input.allowVerticalDrag = false
+    this.game.physics.arcade.enable(this)
+    this.body.collideWorldBounds = true
+    this.body.moves = false;
+    this.game.add.existing(this)
   }
 
   update () {

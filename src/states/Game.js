@@ -1,7 +1,7 @@
 /* globals __DEV__ */
 import Phaser from 'phaser'
 import Mushroom from '../sprites/Mushroom'
-import Bucket from '../ships/Ship'
+import Ship from '../ships/Ship'
 import Constants from '../constants'
 import StarSpawner from '../systems/StarSpawner'
 import Comet from '../stars/Comet'
@@ -30,31 +30,22 @@ export default class extends Phaser.State {
     fuel.fill = score.fill = UIfontFill
 
     this.stars = this.add.group()
-    this.stars.enableBody = true;
 
     /* ======================
       SHIP
     ====================== */
-    this.ship = new Bucket({
+    this.ship = new Ship({
       game: this.game,
       x: this.world.centerX,
       y: this.world.bounds.height - 80,
-      asset: 'ship',
-      z: 3
+      asset: 'ship'
     })
 
-    this.game.physics.arcade.enable(this.ship)
-    this.ship.body.collideWorldBounds = true
-    this.ship.body.moves = false;
-
-    this.game.add.existing(this.ship)
-
     this.game.time.events.repeat(Phaser.Timer.SECOND * 2, 100, this.createStar, this);
-
   }
 
   update() {
-    this.game.physics.arcade.overlap(this.stars, this.ship, this.shipCometCollide, null, this);
+    // this.game.physics.arcade.overlap(this.stars, this.ship, this.shipCometCollide, null, this);
 
     this.stars.forEach(star => this.game.physics.arcade.overlap(this.ship, star, this.shipCometCollide, null, this))
 
@@ -65,14 +56,14 @@ export default class extends Phaser.State {
   }
 
   // Eat the comet
-  shipCometCollide(comet, ship) {
-    comet.kill();
+  shipCometCollide(ship, star) {
+    star.kill();
   }
 
   render () {
     // if (__DEV__) {
-    //   this.game.debug.spriteInfo(this.mushroom, 32, 32)
-    //   this.game.debug.spriteInfo(this.bucket, 32, 32)
+    //   this.game.debug.spriteInfo(this.stars, 32, 32)
+    //   this.game.debug.spriteInfo(this.ship, 32, 32)
     // }
   }
 
@@ -83,16 +74,10 @@ export default class extends Phaser.State {
       game: this.game,
       x: xspawn,
       y: -100,
-      z: 1,
       asset: 'comet'
     })
 
-    this.game.physics.arcade.enable(star)
-    star.body.gravity.y = 100
-    star.body.collideWorldBounds = false
-
     this.stars.add(star)
-    this.game.add.existing(star)
   }
 
 }
