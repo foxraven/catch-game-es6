@@ -6,6 +6,7 @@ export default class extends Star {
         this.game.physics.arcade.enable(this)
         this.body.collideWorldBounds = false
         this.body.gravity.y = 200
+        this.game.add.existing(this)
     }
 
     update () {
