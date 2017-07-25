@@ -31,6 +31,5 @@ export default class extends Phaser.Sprite {
     if (this.y > this.currentYCoords || this.y < this.currentYCoords) {
       this.y = this.currentYCoords
     }
-
   }
 }

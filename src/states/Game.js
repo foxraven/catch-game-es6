@@ -1,10 +1,10 @@
 /* globals __DEV__ */
 import Phaser from 'phaser'
-import Mushroom from '../sprites/Mushroom'
 import Ship from '../ships/Ship'
 import Constants from '../constants'
 import StarSpawner from '../systems/StarSpawner'
 import Comet from '../stars/Comet'
+import RedDwarf from '../stars/RedDwarf'
 
 export default class extends Phaser.State {
   init () {}
@@ -19,15 +19,17 @@ export default class extends Phaser.State {
     let UIfont = 'Press Start 2P'
     let UIfontSize = 16
     let UIfontFill = '#FFFFFF'
-    let score = this.add.text(this.game.width - 90, 10, Constants.score)
-    score.padding.set(10, 16)
+    this.score = 0
+    this.scoreText = this.add.text(this.game.width - 150, 10, Constants.score)
+    this.scoreText.padding.set(10, 16)
 
-    let fuel = this.add.text(10, 10, Constants.fuel)
-    fuel.padding.set(10, 16)
+    this.fuel = 2000
+    this.fuelText = this.add.text(10, 10, Constants.fuel)
+    this.fuelText.padding.set(10, 16)
 
-    fuel.font = score.font = UIfont
-    fuel.fontSize = score.fontSize = UIfontSize
-    fuel.fill = score.fill = UIfontFill
+    this.fuelText.font = this.scoreText.font = UIfont
+    this.fuelText.fontSize = this.scoreText.fontSize = UIfontSize
+    this.fuelText.fill = this.scoreText.fill = UIfontFill
 
     this.stars = this.add.group()
 
@@ -47,14 +49,29 @@ export default class extends Phaser.State {
   update() {
     this.stars.forEach(star => this.game.physics.arcade.overlap(this.ship, star, this.shipCometCollide, null, this))
 
+    let startX = this.ship.x
+
     // Ship follows the mouse
     if (this.game.input.activePointer.x < this.ship.x || this.game.input.activePointer.x > this.ship.x) {
       this.ship.x = game.input.activePointer.x;
     }
+
+    let endX = this.ship.x
+    let fuelUsed = Math.abs(startX - endX)
+
+    this.fuel -= fuelUsed
+
+    if(this.fuel <= 0) {
+      this.state.start('End', true, false, this.score)
+    }
+
+    this.scoreText.text = Constants.score + this.score
+    this.fuelText.text = Constants.fuel + this.fuel
   }
 
   // Eat the comet
   shipCometCollide(ship, star) {
+    this.score += star.score
     star.kill();
   }
 
@@ -66,15 +83,27 @@ export default class extends Phaser.State {
   }
 
   createStar() {
-    let xspawn = Math.floor(Math.random() * this.world.bounds.width)
+    let xspawn = Math.floor(Math.random() * this.game.width)
 
-    let star = new Comet({
-      game: this.game,
-      x: xspawn,
-      y: -100,
-      asset: 'comet'
+    let whichStar = Math.random()
+
+    let star = null
+
+    if(whichStar > 0.49) {
+      star = new Comet({
+        game: this.game,
+        x: xspawn,
+        y: -100,
+        asset: 'comet'
     })
-
+    } else {
+      star = new RedDwarf({
+        game: this.game,
+        x: xspawn,
+        y: -100,
+        asset: 'comet'
+      })
+    }
     this.stars.add(star)
   }
 
