@@ -14,8 +14,13 @@ export default class extends Phaser.State {
     this.load.image('space', 'assets/images/bg_space.png')
     this.load.image('homestars', 'assets/images/homestars.svg')
 
-    // Stuffs
-    this.load.image('comet', 'assets/images/stars/comet.svg')
+    // Stars
+    this.load.image('comet', 'assets/images/stars/comet.png')
+    this.load.image('redDwarf', 'assets/images/stars/redDwarf.png')
+    this.load.image('neutron', 'assets/images/stars/neutron.png')
+    this.load.image('gasCloud1', 'assets/images/stars/gascloud1.png')
+
+    //Ships
     this.load.image('ship', 'assets/images/ship.svg')
     this.load.image('shiphome', 'assets/images/shiphome.svg')
 

@@ -2,8 +2,13 @@ import Phaser from 'phaser'
 import Constants from '../constants'
 
 export default class extends Phaser.State {
-    init (playerScore) {
+    init (playerScore, destroyedByComet) {
         this.score = playerScore
+        if(destroyedByComet) {
+            this.reason = Constants.endTextDestroyed
+        } else {
+            this.reason = Constants.endText
+        }
     }
 
     create () {
@@ -15,7 +20,7 @@ export default class extends Phaser.State {
         let UIfont = 'Press Start 2P'
         let UIfontSize = 28
         let UIfontFill = '#FFFFFF'
-        let endText = this.add.text(0, 100, Constants.endText)
+        let endText = this.add.text(0, 100, this.reason)
         let endTextScore = this.add.text(0, 200, Constants.endTextScore + this.score)
         let endTextAgain = this.add.text(0, this.game.world.bottom - 350, Constants.endTextAgain)
         endTextAgain.font = endTextScore.font = endText.font = UIfont

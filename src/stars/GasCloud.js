@@ -2,8 +2,8 @@ import Star from '../stars/Star'
 
 export default class extends Star {
     constructor ({ game, x, y }) {
-        super({ game, x, y, asset: 'redDwarf' })
-        this.score = 10
+        super({ game, x, y, asset: 'gasCloud1' })
+        this.refuelShip = true
     }
 
     update () {

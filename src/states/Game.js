@@ -5,6 +5,8 @@ import Constants from '../constants'
 import StarSpawner from '../systems/StarSpawner'
 import Comet from '../stars/Comet'
 import RedDwarf from '../stars/RedDwarf'
+import Neutron from '../stars/Neutron'
+import GasCloud from '../stars/GasCloud'
 
 export default class extends Phaser.State {
   init () {}
@@ -71,14 +73,20 @@ export default class extends Phaser.State {
 
   // Eat the comet
   shipCometCollide(ship, star) {
-    this.score += star.score
-    star.kill();
+    if (star.destroyShip == true) {
+      this.state.start('End', true, false, this.score, true)
+    } else if (star.refuelShip == true) {
+      this.fuel += 1
+    } else {
+      this.score += star.score
+      star.kill();
+    }
   }
 
   render () {
     // if (__DEV__) {
-    //   this.game.debug.spriteInfo(this.stars, 32, 32)
     //   this.game.debug.spriteInfo(this.ship, 32, 32)
+    //   this.game.debug.spriteInfo(this.stars, 32, 32)
     // }
   }
 
@@ -89,19 +97,29 @@ export default class extends Phaser.State {
 
     let star = null
 
-    if(whichStar > 0.49) {
-      star = new Comet({
+    if(whichStar < 0.1) {
+      star = new GasCloud({
         game: this.game,
         x: xspawn,
-        y: -100,
-        asset: 'comet'
-    })
+        y: -100
+      })
+    } else if (whichStar < 0.4) {
+        star = new RedDwarf({
+          game: this.game,
+          x: xspawn,
+          y: -100
+        })
+    } else if (whichStar < 0.7) {
+        star = new Comet({
+          game: this.game,
+          x: xspawn,
+          y: -100
+      })
     } else {
-      star = new RedDwarf({
+      star = new Neutron({
         game: this.game,
         x: xspawn,
-        y: -100,
-        asset: 'comet'
+        y: -100
       })
     }
     this.stars.add(star)
