@@ -45,21 +45,20 @@ export default class extends Phaser.State {
       asset: 'ship'
     })
 
+    this.previousX = this.ship.x
+
     this.game.time.events.repeat(Phaser.Timer.SECOND * 2, 100, this.createStar, this);
   }
 
   update() {
     this.stars.forEach(star => this.game.physics.arcade.overlap(this.ship, star, this.shipCometCollide, null, this))
 
-    let startX = this.ship.x
-
     // Ship follows the mouse
     if (this.game.input.activePointer.x < this.ship.x || this.game.input.activePointer.x > this.ship.x) {
       this.ship.x = game.input.activePointer.x;
     }
 
-    let endX = this.ship.x
-    let fuelUsed = Math.abs(startX - endX)
+    let fuelUsed = Math.abs(this.previousX - this.ship.x)
 
     this.fuel -= fuelUsed
 
@@ -69,6 +68,7 @@ export default class extends Phaser.State {
 
     this.scoreText.text = Constants.score + this.score
     this.fuelText.text = Constants.fuel + this.fuel
+    this.previousX = this.ship.x
   }
 
   // Eat the comet
@@ -76,7 +76,7 @@ export default class extends Phaser.State {
     if (star.destroyShip == true) {
       this.state.start('End', true, false, this.score, true)
     } else if (star.refuelShip == true) {
-      this.fuel += 1
+      this.fuel += 10
     } else {
       this.score += star.score
       star.kill();
