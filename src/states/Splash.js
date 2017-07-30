@@ -65,7 +65,7 @@ export default class extends Phaser.State {
     game.add.tween(this.options).to({ alpha: 1 }, 2000, Phaser.Easing.Linear.None, true, 1000)
 
     function startClick() {
-      this.state.start('Game')
+      this.state.start('Instructions')
     }
 
     function optionsClick() {

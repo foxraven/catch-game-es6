@@ -20,14 +20,16 @@ export default class extends Phaser.State {
         let UIfont = 'Press Start 2P'
         let UIfontSize = 28
         let UIfontFill = '#FFFFFF'
-        let endText = this.add.text(0, 100, this.reason)
-        let endTextScore = this.add.text(0, 200, Constants.endTextScore + this.score)
-        let endTextAgain = this.add.text(0, this.game.world.bottom - 350, Constants.endTextAgain)
-        endTextAgain.font = endTextScore.font = endText.font = UIfont
-        endTextAgain.fontSize = endTextScore.fontSize = endText.fontSize = UIfontSize
-        endTextAgain.fill = endTextScore.fill = endText.fill = UIfontFill
-        endTextAgain.align = endTextScore.align = endText.align = 'center'
-        endTextAgain.centerX = endTextScore.centerX = endText.centerX = this.game.world.centerX
+        let centerX = this.game.world.centerX
+
+        let style = { font: UIfont, fill: UIfontFill, fontSize: UIfontSize, align: 'center', wordWrap: true, wordWrapWidth: 450 }
+
+        let endText = this.add.text(centerX, 100, this.reason, style)
+        endText.anchor.setTo(0.5)
+        let endTextScore = this.add.text(centerX, 200, Constants.endTextScore + this.score, style)
+        endTextScore.anchor.setTo(0.5)
+        let endTextAgain = this.add.text(centerX, this.game.world.bottom - 350, Constants.endTextAgain, style)
+        endTextAgain.anchor.setTo(0.5)
 
         // Buttons
         this.start = this.game.add.button(game.world.centerX - 107, game.world.bottom - 200, 'start', startClick, this)
