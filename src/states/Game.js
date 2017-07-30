@@ -2,7 +2,6 @@
 import Phaser from 'phaser'
 import Ship from '../ships/Ship'
 import Constants from '../constants'
-import StarSpawner from '../systems/StarSpawner'
 import Comet from '../stars/Comet'
 import RedDwarf from '../stars/RedDwarf'
 import Neutron from '../stars/Neutron'
