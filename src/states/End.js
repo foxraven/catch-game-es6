@@ -1,5 +1,6 @@
 import Phaser from 'phaser'
 import Constants from '../constants'
+import ScoreKeeper from '../systems/ScoreKeeper'
 
 export default class extends Phaser.State {
     init (playerScore, destroyedByComet) {
@@ -30,6 +31,10 @@ export default class extends Phaser.State {
         endTextScore.anchor.setTo(0.5)
         let endTextAgain = this.add.text(centerX, this.game.world.bottom - 350, Constants.endTextAgain, style)
         endTextAgain.anchor.setTo(0.5)
+
+        let scoreText = new ScoreKeeper().getScores()
+        let displayScores = this.add.text(centerX, 700, scoreText, style)
+        displayScores.anchor.setTo(0.5)
 
         // Buttons
         this.start = this.game.add.button(game.world.centerX - 107, game.world.bottom - 200, 'start', startClick, this)
