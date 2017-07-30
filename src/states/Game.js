@@ -7,6 +7,7 @@ import Comet from '../stars/Comet'
 import RedDwarf from '../stars/RedDwarf'
 import Neutron from '../stars/Neutron'
 import GasCloud from '../stars/GasCloud'
+import BlackHole from '../stars/BlackHole'
 
 export default class extends Phaser.State {
   init () {}
@@ -22,7 +23,7 @@ export default class extends Phaser.State {
     let UIfontSize = 16
     let UIfontFill = '#FFFFFF'
     this.score = 0
-    this.scoreText = this.add.text(this.game.width - 150, 10, Constants.score)
+    this.scoreText = this.add.text(this.game.width - 170, 10, Constants.score)
     this.scoreText.padding.set(10, 16)
 
     this.fuel = 2000
@@ -47,7 +48,7 @@ export default class extends Phaser.State {
 
     this.previousX = this.ship.x
 
-    this.game.time.events.repeat(Phaser.Timer.SECOND * 2, 100, this.createStar, this);
+    this.game.time.events.repeat(Phaser.Timer.SECOND * 2, 10000, this.createStar, this);
   }
 
   update() {
@@ -60,14 +61,14 @@ export default class extends Phaser.State {
 
     let fuelUsed = Math.abs(this.previousX - this.ship.x)
 
-    this.fuel -= fuelUsed
+    this.fuel -= (fuelUsed + 0.05)
 
     if(this.fuel <= 0) {
       this.state.start('End', true, false, this.score)
     }
 
     this.scoreText.text = Constants.score + this.score
-    this.fuelText.text = Constants.fuel + this.fuel
+    this.fuelText.text = Constants.fuel + Math.floor(this.fuel)
     this.previousX = this.ship.x
   }
 
@@ -76,9 +77,10 @@ export default class extends Phaser.State {
     if (star.destroyShip == true) {
       this.state.start('End', true, false, this.score, true)
     } else if (star.refuelShip == true) {
-      this.fuel += 10
+      this.fuel += star.fuelModifier
     } else {
       this.score += star.score
+      this.fuel += star.fuelModifier
       star.kill();
     }
   }
@@ -91,13 +93,17 @@ export default class extends Phaser.State {
   }
 
   createStar() {
-    let xspawn = Math.floor(Math.random() * this.game.width)
+    let xspawn = Math.round(Math.random() * this.game.width)
+
+    if(xspawn > 430) {
+      xspawn = 430
+    }
 
     let whichStar = Math.random()
 
     let star = null
 
-    if(whichStar < 0.1) {
+    if(whichStar < 0.2) {
       star = new GasCloud({
         game: this.game,
         x: xspawn,
@@ -109,14 +115,20 @@ export default class extends Phaser.State {
           x: xspawn,
           y: -100
         })
-    } else if (whichStar < 0.7) {
+    } else if (whichStar < 0.6) {
         star = new Comet({
           game: this.game,
           x: xspawn,
           y: -100
       })
-    } else {
+    } else if (whichStar < 0.8) {
       star = new Neutron({
+        game: this.game,
+        x: xspawn,
+        y: -100
+      })
+    } else {
+      star = new BlackHole({
         game: this.game,
         x: xspawn,
         y: -100

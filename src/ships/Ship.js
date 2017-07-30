@@ -17,12 +17,12 @@ export default class extends Phaser.Sprite {
   update () {
 
     // Set the x coordinated of the ship so they don't collide with the edges
-    if (this.x < this.width / 2 + 10) {
-      this.x = (this.width / 2) + 10
+    if (this.x < this.width / 2 + 1) {
+      this.x = (this.width / 2) + 1
     }
 
-    if(this.x > this.game.width - this.width / 2 - 10) {
-      this.x = (this.game.width - this.width / 2) - 10
+    if(this.x > this.game.width - this.width / 2 - 1) {
+      this.x = (this.game.width - this.width / 2) - 1
     }
 
     // Set the x coordinated of the ship it stays at the bottom
