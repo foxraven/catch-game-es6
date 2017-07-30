@@ -4,7 +4,7 @@ export default class extends Star {
     constructor ({ game, x, y }) {
         super({ game, x, y, asset: 'comet' })
         this.destroyShip = true
-        this.body.gravity.y = 200
+        this.body.gravity.y = 500
     }
 
     update () {
