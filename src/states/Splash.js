@@ -27,7 +27,7 @@ export default class extends Phaser.State {
     //Ships
     this.load.image('ship', 'assets/images/ship.png')
     this.load.image('shiphome', 'assets/images/shiphome.svg')
-    this.load.spriteSheet('shipExplosion', 'assets/images/explosion.png')
+    this.load.spritesheet('shipExplosion', 'assets/images/explosion.png')
 
     // Title
     this.load.image('title', 'assets/images/title.svg')
