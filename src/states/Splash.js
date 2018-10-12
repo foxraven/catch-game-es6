@@ -40,12 +40,18 @@ export default class extends Phaser.State {
 
   create () {
 
+    //aliases to shorten code
+    let gw_cent_x = game.world.centerX;
+    let gw_cent_y = game.world.centerY;
+    let gw_top = game.world.top;
+    let gw_bot = game.world.bottom;
+
     // Home Bg & Images
     this.game.add.tileSprite(0, 0, game.width, game.height, 'space')
     this.game.add.tileSprite(0, 0, game.width, game.height, 'homestars')
 
     // Title
-    this.title = this.game.add.image(game.world.centerX - 96, game.world.top + 30, 'title')
+    this.title = this.game.add.image(gw_cent_x - 96, gw_top + 30, 'title')
     this.title.alpha = 0
     game.add.tween(this.title).to({ alpha: 1 }, 2000, Phaser.Easing.Linear.None, true, 1000)
 

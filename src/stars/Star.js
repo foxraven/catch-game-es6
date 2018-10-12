@@ -13,6 +13,7 @@ export default class extends Phaser.Sprite {
         this.body.gravity.y = 100
         this.gravityModifier = 0
         this.game.add.existing(this)
+        this.baseSpeed = 1
     }
 
     update (speed) {
