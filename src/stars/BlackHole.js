@@ -5,7 +5,7 @@ export default class extends Star {
         super({ game, x, y, asset: 'blackhole' })
         this.fuelModifier = -200
         this.speedModifier = 2
-        this.score *= this.speedModifier * 1.5
+        this.score = this.speedModifier * 1.5 * 10
     }
 
     update () {
